@@ -3,6 +3,7 @@ const ramenAPI = 'http://localhost:3000'
 
 const menu = document.querySelector('#ramen-menu')
 const ramenForm = document.querySelector('#new-ramen')
+const ramenInfo = document.querySelector('#ramen-detail')
 
 // ! 2- when item from ramen menu is clicked, display info for that item
 // Callbacks
@@ -15,8 +16,23 @@ const addSubmitListener = () => {
   // Add code
 }
 
+const getRamen = () => {
+  return fetch(`${ramenAPI}/ramens`)
+    .then(res => {
+      if (!res.ok) {
+        throw res.statusText
+      } else {
+        return res.json()
+    }
+  }) 
+    .then(ramenObj => {
+      displayRamens(ramenObj)})
+}
+
 // ! 2- populate ramen menu
-const displayRamens = () => { //fetch here
+const displayRamens = (ramenObj) => {
+  console.log(ramenObj)
+
   // receives ramen data
   // display img
   // append img to #ramen-menu
@@ -27,6 +43,7 @@ const displayRamens = () => { //fetch here
 // Start logic
 // ** Attention here **: Your program should have a main() function that invokes displayRamens and addSubmitListener after the DOM has fully loaded and start the program logic.
 const main = () => { 
+  getRamen()
   // Invoke displayRamens here
   // Invoke addSubmitListener here
 }
