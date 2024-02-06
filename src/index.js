@@ -16,6 +16,15 @@ const addSubmitListener = () => {
   // Add code
 }
 
+// ! 2- populate ramen menu
+const displayRamens = (ramenObj) => {   // receives ramen data
+  console.log(ramenObj)
+  const img = document.createElement('img') // create image tag
+  img.src = ramenObj.image
+  img.addEventListener('click', e => handleClick(cakeObj)) //add event listener
+  menu.append(img) //append to menu div
+}
+
 const getRamen = () => {
   return fetch(`${ramenAPI}/ramens`)
     .then(res => {
@@ -26,18 +35,10 @@ const getRamen = () => {
     }
   }) 
     .then(ramenObj => {
-      displayRamens(ramenObj)})
-}
-
-// ! 2- populate ramen menu
-const displayRamens = (ramenObj) => {
-  console.log(ramenObj)
-
-  // receives ramen data
-  // display img
-  // append img to #ramen-menu
-  // add event listener calling handleClick
-  // Add code
+      ramenObj.forEach(ramen => displayRamens(ramen))
+      // displayRamens(ramenObj)})
+    })
+    .catch(err => console.error(err))
 }
 
 // Start logic
