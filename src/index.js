@@ -16,7 +16,7 @@ const addSubmitListener = () => {
   // Add code
 }
 
-// ! 2- populate ramen menu
+// 2- populate ramen menu
 const displayRamens = (ramenObj) => {   // receives ramen data
   console.log(ramenObj)
   const img = document.createElement('img') // create image tag
@@ -26,16 +26,15 @@ const displayRamens = (ramenObj) => {   // receives ramen data
   menu.append(img) //append to menu div
 }
 
-// ! 1 - write resuable fetch call
+// 1 - write resuable fetch call
 const getRamen = () => {
   return fetch(`${ramenAPI}/ramens`)
     .then(res => {
-      if (!res.ok) {
-        throw res.statusText
-      } else {
+      if (res.ok) {
         return res.json()
-    }
-  }) 
+      }
+      throw res.statusText
+    }) 
     .then(ramenObj => {
       ramenObj.forEach(ramen => displayRamens(ramen))
       // displayRamens(ramenObj)})
