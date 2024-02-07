@@ -12,23 +12,13 @@ const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
-const handleDelete = (e) => {
-  e.target.parentNode.remove()
-}
-
 // populate #ramen-menu
 const displayRamens = (ramenObj) => {
   const img = document.createElement('img')
   img.src = ramenObj.image
   img.alt = ramenObj.name
   // img.id = ramenObj.id //pass object id to menu
-  img.addEventListener('click', e => handleClick(ramenObj))
-
-  // const btn = document.createElement('button')
-  // btn.addEventListener('click', handleDelete)
-  // btn.textContent = 'x'
- 
-  // img.appendChild('btn')
+  img.addEventListener('click', e => handleClick(ramenObj)) 
   menu.append(img)
 }
 
