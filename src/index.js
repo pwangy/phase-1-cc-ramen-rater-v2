@@ -7,15 +7,19 @@ const ramenImg = document.querySelector('img.detail-image')
 const ramenRating = document.querySelector('#rating-display')
 const ramenComment = document.querySelector('#comment-display')
 const ramenForm = document.querySelector('#new-ramen')
-const newRamenName = document.querySelector('#new-name')
-const newRamenResturaunt = document.querySelector('#new-restaurant')
-const newRamenImg = document.querySelector('#new-image')
-const newRamenRating = document.querySelector('#new-rating')
-const newRamenComment = document.querySelector('#new-comment')
+// const newRamenName = document.querySelector('#new-name')
+// const newRamenResturaunt = document.querySelector('#new-restaurant')
+// const newRamenImg = document.querySelector('#new-image')
+// const newRamenRating = document.querySelector('#new-rating')
+// const newRamenComment = document.querySelector('#new-comment')
 
 // #ramen-menu
 const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
+}
+
+const handleDelete = (e) => {
+  e.target.parentNode.remove()
 }
 
 // populate #ramen-menu
@@ -25,6 +29,12 @@ const displayRamens = (ramenObj) => {
   img.alt = ramenObj.name
   // img.id = ramenObj.id //pass object id to menu
   img.addEventListener('click', e => handleClick(ramenObj))
+
+  const btn = document.createElement('button')
+  btn.addEventListener('click', handleDelete)
+  btn.textContent = 'x'
+ 
+  img.appendChild('btn')
   menu.append(img)
 }
 
@@ -55,14 +65,20 @@ const getRamen = () => {
 }
 
 // #new-ramen form
-//listen for action on form 
+// detect form submission
 const addSubmitListener = () => {
   ramenForm.addEventListener('submit', handleSubmit)
 }
 
-// upon form submission
+// create new ramen and pass to displayRamens
 const handleSubmit = (e) => {
   e.preventDefault()
+
+  const newRamenName = document.querySelector('#new-name')
+  const newRamenResturaunt = document.querySelector('#new-restaurant')
+  const newRamenImg = document.querySelector('#new-image')
+  const newRamenRating = document.querySelector('#new-rating')
+  const newRamenComment = document.querySelector('#new-comment')
   
   const newRamen = {
     name: newRamenName.value,
@@ -101,6 +117,7 @@ export {
 // ! Advanced Deliverables
 // User can:
 // Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the index.html file to create the edit form (see img)
+
 // Delete a ramen (you can add a "delete" button if you'd like, or use an existing element to handle the delete action). The ramen should be removed from the ramen-menu div, and should not be displayed in the ramen-detail div. No need to persist.
 
 // ! Extra Advanced Deliverables
