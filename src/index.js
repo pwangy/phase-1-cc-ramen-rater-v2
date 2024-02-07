@@ -1,36 +1,15 @@
-// ! Define global variables
 const ramenAPI = 'http://localhost:3000'
-
 const menu = document.querySelector('#ramen-menu')
 const ramenName = document.querySelector('h2')
 const ramenRestaurant = document.querySelector('h3.restaurant')
-
 const ramenImg = document.querySelector('img.detail-image')
 const ramenRating = document.querySelector('#rating-display')
 const ramenComment = document.querySelector('#comment-display')
-
 const ramenForm = document.querySelector('#new-ramen')
-const ramenInfo = document.querySelector('#ramen-detail')
 
-// ! 2- when item from ramen menu is clicked, display info for that item
-// Callbacks
+// #ramen-menu
 const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
-}
-
-// 3 - add functionality to the ramenForm
-const addSubmitListener = () => {
-  // Add 
-}
-
-// populate individual ramen detail
-const displayRamenDetail = (ramenObj) => {
-  ramenName.innerText = ramenObj.name
-  ramenRestaurant.innerText = ramenObj.restaurant
-  ramenRating.innerText = ramenObj.rating
-  ramenComment.innerText = ramenObj.comment
-  ramenImg.src = ramenObj.image
-  ramenImg.alt = ramenObj.name
 }
 
 // populate #ramen-menu
@@ -43,7 +22,17 @@ const displayRamens = (ramenObj) => {
   menu.append(img)
 }
 
-// 1 - write resuable fetch call
+// populate #ramen-detail
+const displayRamenDetail = (ramenObj) => {
+  ramenImg.src = ramenObj.image
+  ramenImg.alt = ramenObj.name
+  ramenName.innerText = ramenObj.name
+  ramenRestaurant.innerText = ramenObj.restaurant
+  ramenRating.innerText = ramenObj.rating
+  ramenComment.innerText = ramenObj.comment
+}
+
+// Fetch data!
 const getRamen = () => {
   return fetch(`${ramenAPI}/ramens`)
     .then(res => {
@@ -59,12 +48,48 @@ const getRamen = () => {
     .catch(err => console.error(err))
 }
 
+// #new-ramen form
+//listen for action on form 
+const addSubmitListener = () => {
+  ramenForm.addEventListener('submit', handleSubmit)
+}
+
+// do something upon form submission
+const handleSubmit = (e) => {
+  e.preventDefault()
+  
+  const newRamen = () => {
+    name: e.target.name.value,
+    restaurant: e.target.restaurant.value,
+    image: e.target.image.value,
+    rating: e.target.rating.value,
+    comment: e.target.comment.value,
+  }
+  displayRamens(newRamen)
+  // do something with incoming data
+  e.target.reset() //clear form
+}
+
+
+// ! Deliverables
+//After form submission, create a new ramen and add it to the#ramen-menu div. 
+// The new ramen does not need to persist; in other words, if you refresh the page, it's okay that the new ramen is no longer on the page.
+
+
+
+
+
+
+
+
+
 // Start logic on page load
 const main = () => { 
   getRamen()
-  displayRamens()
+  // displayRamens()
   addSubmitListener()
 }
+
 main()
 
 // Export functions for testing
@@ -80,8 +105,6 @@ export {
 
 // GET /ramens/:id
 
-// ! Deliverables
-// Attach a submit even listener to the new-ramen form using a function called addSubmitListener. After the submission, create a new ramen and add it to the#ramen-menu div. The new ramen does not need to persist; in other words, if you refresh the page, it's okay that the new ramen is no longer on the page.
 
 // ! Advanced Deliverables
 // User can:
