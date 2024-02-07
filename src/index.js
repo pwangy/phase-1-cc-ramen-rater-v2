@@ -1,4 +1,5 @@
 const ramenAPI = 'http://localhost:3000'
+
 const menu = document.querySelector('#ramen-menu')
 const ramenName = document.querySelector('h2')
 const ramenRestaurant = document.querySelector('h3.restaurant')
@@ -6,6 +7,11 @@ const ramenImg = document.querySelector('img.detail-image')
 const ramenRating = document.querySelector('#rating-display')
 const ramenComment = document.querySelector('#comment-display')
 const ramenForm = document.querySelector('#new-ramen')
+const newRamenName = document.querySelector('#new-name')
+const newRamenResturaunt = document.querySelector('#new-restaurant')
+const newRamenImg = document.querySelector('#new-image')
+const newRamenRating = document.querySelector('#new-rating')
+const newRamenComment = document.querySelector('#new-comment')
 
 // #ramen-menu
 const handleClick = (ramenObj) => {
@@ -32,7 +38,7 @@ const displayRamenDetail = (ramenObj) => {
   ramenComment.innerText = ramenObj.comment
 }
 
-// Fetch data!
+// Fetch data
 const getRamen = () => {
   return fetch(`${ramenAPI}/ramens`)
     .then(res => {
@@ -54,24 +60,21 @@ const addSubmitListener = () => {
   ramenForm.addEventListener('submit', handleSubmit)
 }
 
-// do something upon form submission
+// upon form submission
 const handleSubmit = (e) => {
   e.preventDefault()
-
+  
   const newRamen = {
-    name: e.target.name.value,
-    restaurant: e.target.restaurant.value,
-    image: e.target.image.value,
-    rating: e.target.rating.value,
-    comment: e.target.new-comment.value
+    name: newRamenName.value,
+    restaurant: newRamenResturaunt.value,
+    image: newRamenImg.value,
+    rating: newRamenRating.value,
+    comment: newRamenComment.value
   }
   displayRamens(newRamen)
   e.target.reset() //clear form
 }
-
-// ! Deliverables
-//After form submission, create a new ramen and add it to the#ramen-menu div. 
-// The new ramen does not need to persist; in other words, if you refresh the page, it's okay that the new ramen is no longer on the page.
+// https://futuredish.com/wp-content/uploads/2019/10/Jeju-Seafood-Ramen.jpg
 
 // Start logic on page load
 const main = () => { 
@@ -87,14 +90,13 @@ export {
   displayRamens,
   addSubmitListener,
   handleClick,
-  main,
+  main
 }
 
 // json-server --watch db.json (starts backend)
 // live-server (starts frontend in browser)
 
 // GET /ramens/:id
-
 
 // ! Advanced Deliverables
 // User can:
