@@ -57,31 +57,21 @@ const addSubmitListener = () => {
 // do something upon form submission
 const handleSubmit = (e) => {
   e.preventDefault()
-  
-  const newRamen = () => {
+
+  const newRamen = {
     name: e.target.name.value,
     restaurant: e.target.restaurant.value,
     image: e.target.image.value,
     rating: e.target.rating.value,
-    comment: e.target.comment.value,
+    comment: e.target.new-comment.value
   }
   displayRamens(newRamen)
-  // do something with incoming data
   e.target.reset() //clear form
 }
-
 
 // ! Deliverables
 //After form submission, create a new ramen and add it to the#ramen-menu div. 
 // The new ramen does not need to persist; in other words, if you refresh the page, it's okay that the new ramen is no longer on the page.
-
-
-
-
-
-
-
-
 
 // Start logic on page load
 const main = () => { 
