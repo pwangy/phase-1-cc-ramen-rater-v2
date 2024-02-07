@@ -1,5 +1,4 @@
 const ramenAPI = 'http://localhost:3000'
-
 const menu = document.querySelector('#ramen-menu')
 const ramenName = document.querySelector('h2')
 const ramenRestaurant = document.querySelector('h3.restaurant')
@@ -7,11 +6,6 @@ const ramenImg = document.querySelector('img.detail-image')
 const ramenRating = document.querySelector('#rating-display')
 const ramenComment = document.querySelector('#comment-display')
 const ramenForm = document.querySelector('#new-ramen')
-// const newRamenName = document.querySelector('#new-name')
-// const newRamenResturaunt = document.querySelector('#new-restaurant')
-// const newRamenImg = document.querySelector('#new-image')
-// const newRamenRating = document.querySelector('#new-rating')
-// const newRamenComment = document.querySelector('#new-comment')
 
 // #ramen-menu
 const handleClick = (ramenObj) => {
@@ -30,11 +24,11 @@ const displayRamens = (ramenObj) => {
   // img.id = ramenObj.id //pass object id to menu
   img.addEventListener('click', e => handleClick(ramenObj))
 
-  const btn = document.createElement('button')
-  btn.addEventListener('click', handleDelete)
-  btn.textContent = 'x'
+  // const btn = document.createElement('button')
+  // btn.addEventListener('click', handleDelete)
+  // btn.textContent = 'x'
  
-  img.appendChild('btn')
+  // img.appendChild('btn')
   menu.append(img)
 }
 
@@ -73,13 +67,11 @@ const addSubmitListener = () => {
 // create new ramen and pass to displayRamens
 const handleSubmit = (e) => {
   e.preventDefault()
-
   const newRamenName = document.querySelector('#new-name')
   const newRamenResturaunt = document.querySelector('#new-restaurant')
   const newRamenImg = document.querySelector('#new-image')
   const newRamenRating = document.querySelector('#new-rating')
   const newRamenComment = document.querySelector('#new-comment')
-  
   const newRamen = {
     name: newRamenName.value,
     restaurant: newRamenResturaunt.value,
