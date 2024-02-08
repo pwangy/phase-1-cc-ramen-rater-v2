@@ -12,14 +12,29 @@ const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
+
+const handleDelete = (e) => {
+  div.remove()
+}
+
 // populate #ramen-menu
 const displayRamens = (ramenObj) => {
   const img = document.createElement('img')
   img.src = ramenObj.image
   img.alt = ramenObj.name
-  // img.id = ramenObj.id //pass object id to menu
-  img.addEventListener('click', e => handleClick(ramenObj)) 
-  menu.append(img)
+  img.addEventListener('click', e => handleClick(ramenObj))
+  
+  const div = document.createElement('div')
+  // div.id = ramenObj.id
+  div.className = 'ramen-menu-item'
+
+  const btn = document.createElement('button')
+  btn.textContent = 'x'
+  btn.id = 'delete'
+  btn.addEventListener('click', e => handleDelete)
+
+  div.append(img, btn)
+  menu.append(div)
 }
 
 // populate #ramen-detail
@@ -97,8 +112,7 @@ export {
 // GET /ramens/:id
 
 // ! Advanced Deliverables
-// User can:
-// Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the index.html file to create the edit form (see img)
+// User can: Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the index.html file to create the edit form (see img)
 
 // Delete a ramen (you can add a "delete" button if you'd like, or use an existing element to handle the delete action). The ramen should be removed from the ramen-menu div, and should not be displayed in the ramen-detail div. No need to persist.
 
