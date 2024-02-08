@@ -1,4 +1,4 @@
-const ramenAPI = 'http://localhost:3000'
+const ramenAPI = 'http://localhost:3000/'
 const menu = document.querySelector('#ramen-menu')
 const ramenName = document.querySelector('h2')
 const ramenRestaurant = document.querySelector('h3.restaurant')
@@ -12,7 +12,7 @@ const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
-// populate #ramen-menu
+// Populate #ramen-menu
 const displayRamens = (ramenObj) => {
   const img = document.createElement('img')
   img.src = ramenObj.image
@@ -26,13 +26,17 @@ const displayRamens = (ramenObj) => {
   const btn = document.createElement('button')
   btn.textContent = 'x'
   btn.id = 'delete'
-  btn.addEventListener('click', e => {div.remove(ramenObj.id)})
+  btn.addEventListener('click', e => {
+    console.log(`deleting ${div.id}`)
+    div.remove(ramenObj.id)
+    deleteRamen(`${div.id}`)
+  })
 
   div.append(img, btn)
   menu.append(div)
 }
 
-// populate #ramen-detail
+// Populate #ramen-detail
 const displayRamenDetail = (ramenObj) => {
   ramenImg.src = ramenObj.image
   ramenImg.alt = ramenObj.name
@@ -44,7 +48,7 @@ const displayRamenDetail = (ramenObj) => {
 
 // Fetch data
 const getRamen = () => {
-  return fetch(`${ramenAPI}/ramens`)
+  return fetch(`${ramenAPI}ramens`)
     .then(res => {
       if (res.ok) {
         return res.json()
@@ -64,7 +68,7 @@ const addSubmitListener = () => {
   ramenForm.addEventListener('submit', handleSubmit)
 }
 
-// create new ramen and pass to displayRamens
+// Create new ramen and pass to displayRamens
 const handleSubmit = (e) => {
   e.preventDefault()
   const newRamenName = document.querySelector('#new-name')
@@ -84,10 +88,22 @@ const handleSubmit = (e) => {
 }
 // https://futuredish.com/wp-content/uploads/2019/10/Jeju-Seafood-Ramen.jpg
 
+// Persist a DELETE request
+const deleteRamen = (ramenId) => {
+  return fetch(`${ramenAPI}ramens/${ramenId}`, {method: 'DELETE'})
+    .then(res => {
+      if (res.ok) {
+        return 'Ramen deleted!'
+      } {
+        throw 'Failed to delete ramen.'
+      }
+  })
+}
+
 // Start logic on page load
 const main = () => { 
   getRamen()
-  // displayRamens()
+  // displayRamens() no need to call since the fetch call lives in getRamen() 
   addSubmitListener()
 }
 
@@ -114,9 +130,7 @@ export {
 // ! Extra Advanced Deliverables
 // You'll need these endpoints for the advanced deliverables:
 // POST /ramens
-// DELETE /ramens/:id
 // PATCH /ramens/:id
 // User can:
 // persist my updates to a ramen's rating and comment. (PATCH request)
 // persist new ramens that I create (POST request)
-// persist any ramen deletions (DELETE request)
