@@ -12,6 +12,7 @@ const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
+
 const handleDelete = (e) => {
   div.remove()
 }
@@ -22,8 +23,7 @@ const displayRamens = (ramenObj) => {
   img.src = ramenObj.image
   img.alt = ramenObj.name
   img.addEventListener('click', e => handleClick(ramenObj))
-// {debugger}
-
+  
   const div = document.createElement('div')
   // div.id = ramenObj.id
   div.className = 'ramen-menu-item'
@@ -36,8 +36,6 @@ const displayRamens = (ramenObj) => {
   div.append(img, btn)
   menu.append(div)
 }
-
-
 
 // populate #ramen-detail
 const displayRamenDetail = (ramenObj) => {
