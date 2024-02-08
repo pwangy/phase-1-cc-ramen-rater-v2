@@ -12,32 +12,25 @@ const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
-const handleDelete = (e) => {
-  div.remove()
-}
-
 // populate #ramen-menu
 const displayRamens = (ramenObj) => {
   const img = document.createElement('img')
   img.src = ramenObj.image
   img.alt = ramenObj.name
   img.addEventListener('click', e => handleClick(ramenObj))
-// {debugger}
 
   const div = document.createElement('div')
-  // div.id = ramenObj.id
+  div.id = ramenObj.id
   div.className = 'ramen-menu-item'
 
   const btn = document.createElement('button')
   btn.textContent = 'x'
   btn.id = 'delete'
-  btn.addEventListener('click', e => handleDelete)
+  btn.addEventListener('click', e => {div.remove(ramenObj.id)})
 
   div.append(img, btn)
   menu.append(div)
 }
-
-
 
 // populate #ramen-detail
 const displayRamenDetail = (ramenObj) => {
@@ -116,7 +109,7 @@ export {
 // ! Advanced Deliverables
 // User can: Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the index.html file to create the edit form (see img)
 
-// Delete a ramen (you can add a "delete" button if you'd like, or use an existing element to handle the delete action). The ramen should be removed from the ramen-menu div, and should not be displayed in the ramen-detail div. No need to persist.
+// Delete a ramen... and should not be displayed in the ramen-detail div. No need to persist.
 
 // ! Extra Advanced Deliverables
 // You'll need these endpoints for the advanced deliverables:
