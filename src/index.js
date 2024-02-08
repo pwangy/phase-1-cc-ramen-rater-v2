@@ -46,7 +46,7 @@ const displayRamens = (ramenObj) => {
   img.src = ramenObj.image
   img.alt = ramenObj.name
   img.addEventListener('click', e => handleClick(ramenObj))
-
+  
   const div = document.createElement('div')
   const id =  div.id = ramenObj.id
   div.className = 'ramen-menu-item'
