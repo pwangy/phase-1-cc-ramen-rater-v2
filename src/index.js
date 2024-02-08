@@ -1,3 +1,4 @@
+// Define globals 
 const ramenAPI = 'http://localhost:3000/'
 const menu = document.querySelector('#ramen-menu')
 const ramenName = document.querySelector('h2')
@@ -7,12 +8,12 @@ const ramenRating = document.querySelector('#rating-display')
 const ramenComment = document.querySelector('#comment-display')
 const ramenForm = document.querySelector('#new-ramen')
 
-// #ramen-menu
+// #ramen-menu helper
 const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
-// Populate #ramen-menu
+// #ramen-menu
 const displayRamens = (ramenObj) => {
   const img = document.createElement('img')
   img.src = ramenObj.image
@@ -20,30 +21,47 @@ const displayRamens = (ramenObj) => {
   img.addEventListener('click', e => handleClick(ramenObj))
 
   const div = document.createElement('div')
-  div.id = ramenObj.id
+  const id =  div.id = ramenObj.id
   div.className = 'ramen-menu-item'
 
   const btn = document.createElement('button')
   btn.textContent = 'x'
   btn.id = 'delete'
   btn.addEventListener('click', e => {
-    console.log(`deleting ${div.id}`)
+    checkDisplayedRamen(id)
     div.remove(ramenObj.id)
     deleteRamen(`${div.id}`)
+    checkDisplayedRamen(`${div.id}`)
   })
-
   div.append(img, btn)
   menu.append(div)
 }
 
-// Populate #ramen-detail
+// #ramen-detail
 const displayRamenDetail = (ramenObj) => {
   ramenImg.src = ramenObj.image
   ramenImg.alt = ramenObj.name
   ramenName.innerText = ramenObj.name
+  const displayedId = ramenName.id = ramenObj.id
   ramenRestaurant.innerText = ramenObj.restaurant
   ramenRating.innerText = ramenObj.rating
   ramenComment.innerText = ramenObj.comment
+  
+  return displayedId
+}
+
+const resetDetails = (ramenObj) => {
+  ramenImg.src = './assets/image-placeholder.jpg'
+  ramenImg.alt = 'Select a ramen to see details'
+  ramenName.innerText = 'Select a ramen to see details'
+  displayedId = ''
+  ramenRestaurant.innerText = ''
+  ramenRating.innerText = '0'
+  ramenComment.innerText = ''
+}
+
+const checkDisplayedRamen = (displayedId, id) => {
+  displayedId === id ? resetDetails(id) : console.log('Nothing to clear.')
 }
 
 // Fetch data
@@ -86,6 +104,7 @@ const handleSubmit = (e) => {
   displayRamens(newRamen)
   e.target.reset() //clear form
 }
+// use to test form
 // https://futuredish.com/wp-content/uploads/2019/10/Jeju-Seafood-Ramen.jpg
 
 // Persist a DELETE request
@@ -120,12 +139,8 @@ export {
 // json-server --watch db.json (starts backend)
 // live-server (starts frontend in browser)
 
-// GET /ramens/:id
-
 // ! Advanced Deliverables
 // User can: Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the index.html file to create the edit form (see img)
-
-// Delete a ramen... and should not be displayed in the ramen-detail div. No need to persist.
 
 // ! Extra Advanced Deliverables
 // You'll need these endpoints for the advanced deliverables:
