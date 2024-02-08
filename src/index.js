@@ -13,6 +13,33 @@ const handleClick = (ramenObj) => {
   displayRamenDetail(ramenObj)
 }
 
+// #ramen-detail
+const displayRamenDetail = (ramenObj) => {
+  ramenImg.src = ramenObj.image
+  ramenImg.alt = ramenObj.name
+  ramenName.innerText = ramenObj.name
+  const displayedId = ramenName.id = ramenObj.id
+  ramenRestaurant.innerText = ramenObj.restaurant
+  ramenRating.innerText = ramenObj.rating
+  ramenComment.innerText = ramenObj.comment
+  
+  return displayedId
+}
+
+const resetDetails = (ramenObj) => {
+  ramenImg.src = './assets/image-placeholder.jpg'
+  ramenImg.alt = ''
+  ramenName.innerText = ''
+  displayedId = ''
+  ramenRestaurant.innerText = ''
+  ramenRating.innerText = ''
+  ramenComment.innerText = ''
+}
+
+const checkDisplayedRamen = (displayedId, id) => {
+  displayedId === id ? resetDetails(id) : console.log('Nothing to clear.')
+}
+
 // #ramen-menu
 const displayRamens = (ramenObj) => {
   const img = document.createElement('img')
@@ -31,37 +58,9 @@ const displayRamens = (ramenObj) => {
     checkDisplayedRamen(id)
     div.remove(ramenObj.id)
     deleteRamen(`${div.id}`)
-    checkDisplayedRamen(`${div.id}`)
   })
   div.append(img, btn)
   menu.append(div)
-}
-
-// #ramen-detail
-const displayRamenDetail = (ramenObj) => {
-  ramenImg.src = ramenObj.image
-  ramenImg.alt = ramenObj.name
-  ramenName.innerText = ramenObj.name
-  const displayedId = ramenName.id = ramenObj.id
-  ramenRestaurant.innerText = ramenObj.restaurant
-  ramenRating.innerText = ramenObj.rating
-  ramenComment.innerText = ramenObj.comment
-  
-  return displayedId
-}
-
-const resetDetails = (ramenObj) => {
-  ramenImg.src = './assets/image-placeholder.jpg'
-  ramenImg.alt = 'Select a ramen to see details'
-  ramenName.innerText = 'Select a ramen to see details'
-  displayedId = ''
-  ramenRestaurant.innerText = ''
-  ramenRating.innerText = '0'
-  ramenComment.innerText = ''
-}
-
-const checkDisplayedRamen = (displayedId, id) => {
-  displayedId === id ? resetDetails(id) : console.log('Nothing to clear.')
 }
 
 // Fetch data
@@ -122,7 +121,6 @@ const deleteRamen = (ramenId) => {
 // Start logic on page load
 const main = () => { 
   getRamen()
-  // displayRamens() no need to call since the fetch call lives in getRamen() 
   addSubmitListener()
 }
 
@@ -143,7 +141,6 @@ export {
 // User can: Update the rating and comment for a ramen by submitting a form. Changes should be reflected on the frontend. No need to persist. You can add this HTML to the index.html file to create the edit form (see img)
 
 // ! Extra Advanced Deliverables
-// You'll need these endpoints for the advanced deliverables:
 // POST /ramens
 // PATCH /ramens/:id
 // User can:
